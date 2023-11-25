@@ -27,6 +27,7 @@ class WebViewController {
     required void Function(String url)? onPageStarted,
   }) async {
     if (is_mobile) {
+          print("mobile");
       late final webview_flutter.PlatformWebViewControllerCreationParams params;
       if (webview_flutter.WebViewPlatform.instance
           is webview_flutter_wkwebview.WebKitWebViewPlatform) {
@@ -44,6 +45,7 @@ class WebViewController {
           webview_flutter.WebViewController.fromPlatformCreationParams(params);
       setState(() {});
       if (!kIsWeb) {
+           print("not web");
         webview_mobile_controller
             .setJavaScriptMode(webview_flutter.JavaScriptMode.unrestricted);
         webview_mobile_controller.setNavigationDelegate(
@@ -83,6 +85,7 @@ Page resource error:
           },
         );
       }
+        print("web");
       webview_mobile_controller.loadRequest(uri);
       // #docregion platform_features
       if (webview_mobile_controller.platform
@@ -94,6 +97,7 @@ Page resource error:
       }
       is_init = true;
     } else if (is_desktop) {
+        print("desktop");
       bool isWebviewAvailable =
           await webview_desktop.WebviewWindow.isWebviewAvailable();
       if (isWebviewAvailable) {
