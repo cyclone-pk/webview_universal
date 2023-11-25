@@ -24,6 +24,7 @@ class WebViewController {
     required BuildContext context,
     required void Function(void Function() fn) setState,
     required Uri uri,
+    required void Function(String url)? onPageStarted,
   }) async {
     if (is_mobile) {
       late final webview_flutter.PlatformWebViewControllerCreationParams params;
@@ -50,9 +51,7 @@ class WebViewController {
             onProgress: (int progress) {
               debugPrint('WebView is loading (progress : $progress%)');
             },
-            onPageStarted: (String url) {
-              debugPrint('Page started loading: $url');
-            },
+            onPageStarted: onPageStarted,
             onPageFinished: (String url) {
               debugPrint('Page finished loading: $url');
             },
